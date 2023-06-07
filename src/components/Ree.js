@@ -241,7 +241,6 @@ import { useDispatch } from 'react-redux';
 //require('dotenv').config();
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-//const API_KEY = "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";
 
 function App() {
   const dispatch = useDispatch();
