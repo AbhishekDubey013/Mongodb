@@ -239,7 +239,7 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { useDispatch } from 'react-redux';
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 function App() {
   const dispatch = useDispatch();
