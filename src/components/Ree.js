@@ -238,8 +238,10 @@ import './App.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { useDispatch } from 'react-redux';
+//require('dotenv').config();
 
-const API_KEY = "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";
+const API_KEY = process.env.REACT_APP_API_KEY;
+//const API_KEY = "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";
 
 function App() {
   const dispatch = useDispatch();
