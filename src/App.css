@@ -177,7 +177,7 @@
 
 .form-container .form-text {
   color: #f8f9fa;
-  font-size: 1rem;
+  font-size: 3rem;
   margin-top: 0.5rem;
 }
 
@@ -185,3 +185,22 @@
   margin-top: 1rem;
 }
 
+.response-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.question {
+  font-size: 35px; /* Adjust the value as needed */
+}
+
+.response-group .form-check label {
+  font-size: 25px; /* Adjust the value as needed */
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

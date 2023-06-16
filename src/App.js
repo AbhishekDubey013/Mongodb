@@ -9,14 +9,18 @@ import Products from './components/Products';
 import Carty from './components/Carty'
 import Ree from './components/Ree'
 import Form1 from './components/Form1'
+import Navbar from './components/Navbar'
+import Home from './components/pages/Home'
+import Footer  from './components/Footer'
+
 //import Re from './components/Re'
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Navbar />
       <Routes>
       <Route path='/signup' element={<Signup />} />
-        <Route path='/' element={<Main />} />
+        <Route path='/' element={<Home />} />
         {/* <Route path='/cart' element={<Cart />} /> */}
         <Route path='/login' element={<Login />} />
         <Route path='/products' element={<Products />} />
@@ -24,6 +28,7 @@ function App() {
         <Route path='/From1' element={<Form1 />} />
         <Route path='/ree' element={<Ree />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

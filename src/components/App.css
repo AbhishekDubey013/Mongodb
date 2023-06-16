@@ -133,6 +133,7 @@
   margin: 0 auto;
   padding: 20px;
   background-color: white;
+  align-items: center;
 }
 
 .button-container {
@@ -246,20 +247,12 @@
 }
 
 .question {
-  font-size: 30px;
+  font-size: 50px;
 }
 
-.response {
-  text-align: left;
+
+.response-group {
+  display: flex;
+  justify-content: flex-start;
 }
 
-.rating-form-container {
-  position: absolute;
-  top: -100px;
-  left:500px;
-}
-
-.response {
-  text-align: left;
-  font-size: 18px;
-}
