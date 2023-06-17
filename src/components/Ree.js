@@ -5,7 +5,8 @@ import './HeroSection.css'
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { useDispatch } from 'react-redux';
-import HeroSection from './HeroSection';
+import { Button } from './Button';
+
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -121,8 +122,6 @@ function App() {
             <ul>
               {questionResponses.map((qr, index) => (
                 <li key={index}>
-                  {/* <strong>Question:</strong> {qr.question}<br />
-                  <strong>Answer:</strong> {qr.answer} */}
                 </li>
               ))}
             </ul>
@@ -132,16 +131,6 @@ function App() {
           <button onClick={handleCompleteStoreData}>Diagnose</button>
         </div>
       </div>
-      {/* <div className="data-list">
-        <ul>
-          {data1.map((qr, index) => (
-            <li key={index}>
-              <strong>Question:</strong> {qr.question}<br />
-              <strong>Answer:</strong> {qr.response}
-            </li>
-          ))}
-        </ul>
-      </div> */}
     </div>
   );
 }
