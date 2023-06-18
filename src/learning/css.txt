@@ -1,0 +1,31 @@
+.hero-container {
+  height: 70vh; [adjust height width]
+  width: 100%;
+  display: flex;[a type]
+  flex-direction: column; [content of component placed vertically]
+  justify-content: center; [Their vertical positioning]
+  align-items: center; [[Their horizontal positioning]]
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit: contain; [to maintain aspect ration and ensure its not distorted]
+}
+
+.hero-container > h1 { [will be applied to h elements]
+  color: #fff;
+  font-size: 100px;
+  margin-top: -100px;
+}
+
+.hero-container > p { [will be applied to p elements]
+  margin-top: 8px;
+  color: #fff;
+  font-size: 32px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', [fonts will be checked and will be applied in order]
+    'Lucida Sans', Arial, sans-serif;
+}
+
+.hero-btns {  [for vertical margin]
+  margin-top: 32px;
+}
+
+
+************  margin-top is basically for vertical positioning
