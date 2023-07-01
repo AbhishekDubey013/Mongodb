@@ -10,6 +10,8 @@ import Form1 from './components/Form1'
 import Navbar from './components/Navbar'
 import Home from './components/pages/Home'
 import Footer  from './components/Footer'
+import Chat from './components/Chat'
+import Comp from './components/Comp'
 
 //import Re from './components/Re'
 function App() {
@@ -24,6 +26,8 @@ function App() {
         <Route path='/products' element={<Products />} />
         <Route path='/From1' element={<Form1 />} />
         <Route path='/ree' element={<Ree />} />
+        <Route path='/chat' element={<Chat />} />
+        <Route path='/comp' element={<Comp />} />
       </Routes>
       <Footer />
     </div>

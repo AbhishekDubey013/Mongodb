@@ -6,9 +6,13 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { useDispatch } from 'react-redux';
 import { Button } from './Button';
-
+import { Link,useNavigate } from 'react-router-dom';
+import {add_rc} from '../redux/action'
 
 const API_KEY = process.env.REACT_APP_API_KEY;
+const systemMessage = { //  Explain things like you're talking to a software professional with 5 years of experience.
+  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient,ask question one by one to gather inputs as a psycologist for adhd diagnosis, ask question one by one and next question ask should be based on previous response provide. Ask a total of 10 question and self survey questionare is already performed please make an engaging interaction"
+}
 
 function App() {
   const dispatch = useDispatch();
@@ -20,10 +24,16 @@ function App() {
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
+  const [isDiagnosed, setIsDiagnosed] = useState(false);
+  const navigate = useNavigate();
 
   const questionResponses = useSelector(state => state.questionResponses);
 
   let data1 = useSelector((state) => state.reducera.questionResponses);
+  let data2 = useSelector((state) => state.rchat.RC);
+
+  console.log(data2)
+ 
 
   const handleSend = async (message) => {
     const newMessage = {
@@ -40,6 +50,8 @@ function App() {
     await processMessageToChatGPT(newMessages);
   };
 
+  let sum =0;
+
   const handleCompleteStoreData = async () => {
     setIsTyping(true);
     const storeData = data1.map(qr => ({
@@ -47,15 +59,27 @@ function App() {
       sender: "user"
     }));
 
+    data1.forEach(qr => {
+      let score =0;
+      console.log(qr.response)
+      if (qr.response === "very often") {
+        score = 2;
+      }
+      sum += score;
+      
+    });
+
+    console.log("Sum of scores:", sum);
+
     const additionalMessage = {
       message:
-        "Act as psychology assistant: Give a very crisp inference and percentage on ADHD response provided (not more than two lines), this data will be reviewed by a psychologist further",
+        "responses are present from very often to very rarely, for very often score is 2 often 1 and for rest 0 and add all score and multiply by 5 present as adhd percentage and ask ask user to go for detailed survey DONT SHOW CALCULATION USED TO USER",
       sender: "user"
     };
 
     await processMessageToChatGPT([...messages, ...storeData, additionalMessage]);
-
     dispatch({ type: 'RESET_QUESTION_RESPONSES' });
+    setIsDiagnosed(true);
   };
 
   async function processMessageToChatGPT(chatMessages) {
@@ -72,6 +96,7 @@ function App() {
     const apiRequestBody = {
       "model": "gpt-3.5-turbo",
       "messages": [
+        systemMessage,
         ...apiMessages
       ]
     };
@@ -88,7 +113,7 @@ function App() {
       .then((data) => data.json())
       .then((data) => {
         const responseMessage = data.choices[0].message.content;
-
+        dispatch(add_rc(responseMessage));
         setMessages([{
           message: responseMessage,
           sender: "ChatGPT"
@@ -128,7 +153,17 @@ function App() {
           ) : (
             <p>It will take few Secs</p>
           )}
-          <button onClick={handleCompleteStoreData}>Diagnose</button>
+          <div className="store-data">
+          {isDiagnosed ? (
+            <Link to={{
+              pathname: '/chat'
+            }}>
+              <button>Go to Chat</button>
+            </Link>
+          ) : (
+            <button onClick={handleCompleteStoreData}>Diagnose</button>
+          )}
+        </div>
         </div>
       </div>
     </div>
@@ -136,3 +171,6 @@ function App() {
 }
 
 export default App;
+
+
+

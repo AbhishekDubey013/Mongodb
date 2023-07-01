@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import questionsData from './question.json';
@@ -14,16 +12,20 @@ const RatingForm = () => {
   const navigate = useNavigate();
   const [ratings, setRatings] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [isDiagnosed, setIsDiagnosed] = useState(false);
+
 
   const handleRatingChange = (question, rating) => {
     setRatings(prevRatings => ({
       ...prevRatings,
       [question]: rating
     }));
+    setIsDiagnosed(true);
   };
 
   const handleNext = () => {
     setCurrentQuestion(prevQuestion => prevQuestion + 1);
+    setIsDiagnosed(false);
   };
 
   const handleSubmit = e => {
@@ -86,7 +88,13 @@ const RatingForm = () => {
                   />
                 </Form.Group>
               </div>
-              <button className="btn btn-primary" type = "button" onClick={handleNext}>Next</button>
+              <div className="store-data">
+          {isDiagnosed ? (
+            <>
+            <button className="btn btn-primary" type = "button" onClick={handleNext}>Next</button>
+            </>
+          ) : (<p>Please select one which suits you best</p>)}
+        </div>
             </div>
           ) : (
             <>
@@ -101,6 +109,12 @@ const RatingForm = () => {
 };
 
 export default RatingForm;
+
+
+
+
+
+
 
 
 

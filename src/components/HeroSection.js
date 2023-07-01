@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
+import { Link } from 'react-router-dom';
 
 function HeroSection() {
   return (
@@ -25,6 +26,9 @@ function HeroSection() {
         >
           Coming soon <i className='far fa-play-circle' />
         </Button>
+        <Link to="/chat" target="_blank">
+      <button>Click Here</button>
+    </Link>
       </div>
     </div>
   );

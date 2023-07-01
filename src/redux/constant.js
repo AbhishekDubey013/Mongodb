@@ -6,6 +6,7 @@ export const SET_PRODUCT_LIST="SET_PRODUCT_LIST"
 export const SEARCH_PRODUCT="SEARCH_PRODUCT"
 export const ADD_Q="ADD_Q"
 export const ADD_R="ADD_R"
+export const ADD_RC="ADD_RC"
 
 //nOTHING BUT JUST DEFINING EVERY ACTION TYPE
 

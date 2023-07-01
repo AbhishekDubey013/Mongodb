@@ -5,40 +5,40 @@ import CardItem from './CardItem';
 function Cards() {
   return (
     <div className='cards'>
-      <h1>Check out these EPIC Destinations!</h1>
+      <h1>Check out our Pre-Diagnostic tests!</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-9.jpg'
-              text='Explore the hidden waterfall deep inside the Amazon Jungle'
-              label='Adventure'
+              src='images/Depression.png'
+              text='Break the silence, embrace healing, and reclaim your life from depression'
+              label='Depression'
               path='/services'
             />
             <CardItem
-              src='images/img-2.jpg'
-              text='Travel through the Islands of Bali in a Private Cruise'
-              label='Luxury'
+              src='images/Gas.png'
+              text='Recognize, reject, and rise above gaslighting'
+              label='Gaslighting'
               path='/services'
             />
           </ul>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-3.jpg'
-              text='Set Sail in the Atlantic Ocean visiting Uncharted Waters'
-              label='Mystery'
+              src='images/Anxiety.png'
+              text='Conquer anxiety, embrace peace within.'
+              label='Anxiety'
               path='/services'
             />
             <CardItem
-              src='images/img-4.jpg'
-              text='Experience Football on Top of the Himilayan Mountains'
-              label='Adventure'
-              path='/products'
+              src='images/ADHD.png'
+              text='Unlock your potential, embrace your ADHD uniqueness'
+              label='ADHD'
+              path='/From1'
             />
             <CardItem
-              src='images/img-8.jpg'
-              text='Ride through the Sahara Desert on a guided camel tour'
-              label='Adrenaline'
+              src='images/ocd.png'
+              text='Break free from OCD grip reclaim your peace of mind'
+              label='OCD'
               path='/sign-up'
             />
           </ul>
