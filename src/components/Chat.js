@@ -10,7 +10,7 @@ import {add_rc} from '../redux/action'
 const API_KEY = process.env.REACT_APP_API_KEY;
 // "Explain things like you would to a 10 year old learning how to code."
 const systemMessage = { //  Explain things like you're talking to a software professional with 5 years of experience.
-  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient,ask question one by one to gather inputs as a psycologist for adhd diagnosis, ask question one by one and next question ask should be based on previous response provide. Ask a total of 10 question and self survey questionare is already performed and provided to you, focus on area with rating as very often and often, dont say that you are ai"
+  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient, ask question one by one and next question ask should be based on previous response provide. Ask a total of 10 question and self survey questionare is already performed and provided to you, focus on area with rating as very often and often, dont say that you are ai,"
 }
 
 function App() {
@@ -32,9 +32,10 @@ const storeData = data1.map(qr => ({
   }));
 
   const systemMessage1 = { //  Explain things like you're talking to a software professional with 5 years of experience.
-    "role": "system", "content": data1.join("\n")
+    "role": "system", "content": data1.map(qr => `${qr.question}: ${qr.response}`).join("\n")
   }
 
+  console.log({data1})
   const handleSend = async (message) => {
     const newMessage = {
       message,

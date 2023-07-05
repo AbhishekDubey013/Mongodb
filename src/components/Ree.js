@@ -11,7 +11,7 @@ import {add_rc} from '../redux/action'
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const systemMessage = { //  Explain things like you're talking to a software professional with 5 years of experience.
-  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient,ask question one by one to gather inputs as a psycologist for adhd diagnosis, ask question one by one and next question ask should be based on previous response provide. Ask a total of 10 question and self survey questionare is already performed please make an engaging interaction"
+  "role": "system", "content": "a mock interview with chatgpt as psycologist and user as adhd patient, ask question one by one and next question ask should be based on previous response provide. Ask a total of 10 question and self survey questionare is already performed please make an engaging interaction"
 }
 
 function App() {
