@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import '../App.css';
-import './HeroSection.css'
+import '../components/HeroSection.css'
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { useDispatch } from 'react-redux';
-import { Button } from './Button';
+import { Button } from '../components/Button';
 import { Link,useNavigate } from 'react-router-dom';
 import {add_rc} from '../redux/action'
 

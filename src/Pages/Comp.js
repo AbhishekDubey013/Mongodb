@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
-import Cards from './Cards';
-import Footer from './Footer';
+import Cards from '../components/Cards';
+import Footer from '../components/Footer';
 
 function Home() {
   return (

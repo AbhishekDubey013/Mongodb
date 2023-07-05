@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import questionsData from './question.json';
+import questionsData from '../components/question.json';
 import { add_r } from '../redux/action';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form } from 'react-bootstrap';

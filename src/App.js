@@ -5,13 +5,13 @@ import {Routes, Route, Form} from 'react-router-dom'
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Products from './components/Products';
-import Ree from './components/Ree'
-import Form1 from './components/Form1'
+import Ree from './Pages/Ree'
+import Form1 from './Pages/Form1'
 import Navbar from './components/Navbar'
-import Home from './components/pages/Home'
+import Home from './Pages/Home'
 import Footer  from './components/Footer'
 import Chat from './components/Chat'
-import Comp from './components/Comp'
+import Comp from './Pages/Comp'
 
 //import Re from './components/Re'
 function App() {
