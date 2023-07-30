@@ -212,6 +212,15 @@ router.post('/addqa', async (req, res) => {
     }
   });
   
+  router.get('/getQas', async (req, res) => {
+    try {
+      const allQas = await Qa.find(); // This will fetch all documents from the "qas" collection
+      res.json(allQas);
+    } catch (error) {
+      console.error('Error fetching QAs:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
   
   
 router.get('/users', async (req, res) => {
