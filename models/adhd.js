@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const UserSchema1 = new Schema({
     data:{
-        type:Array,
+        type:mongoose.Schema.Types.Mixed,
         required: false
     },
 
