@@ -190,6 +190,28 @@ router.post('/addqa', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+
+  router.post('/store-sender-info', async (req, res) => {
+    try {
+      const { whatsappNumber, name } = req.body;
+  
+      // Create a new document using the SenderInfo model
+      const newSenderInfo = new SenderInfo({
+        whatsappNumber,
+        name,
+      });
+  
+      // Save the new document to the database
+      await newSenderInfo.save();
+  
+      res.json({ message: 'Sender info stored successfully' });
+    } catch (error) {
+      console.error('Error storing sender info:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
   
   
 router.get('/users', async (req, res) => {
