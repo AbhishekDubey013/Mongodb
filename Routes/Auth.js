@@ -151,11 +151,34 @@ router.get("/products", async(req, res) => {
     })
 });
 
-router.post('/adhd', async (req, res) => {
-    await Qa.create({
-        name: req.body
-    })
-});
-
+router.post('/addqa', async (req, res) => {
+    try {
+      const { data } = req.body;
+  
+      // Create a new document using the Qa model
+      const newQa = new Qa({
+        data,
+        // Add more fields as needed for your "qas" collection
+      });
+  
+      // Save the new document to the "qas" collection
+      const savedQa = await newQa.save();
+  
+      res.json(savedQa);
+    } catch (error) {
+      console.error('Error adding QA:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+router.get('/users', async (req, res) => {
+    try {
+      const allUsers = await User.find(); // This will fetch all documents from the "users" collection
+      res.json(allUsers);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
   
 module.exports = router
