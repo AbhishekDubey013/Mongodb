@@ -194,7 +194,7 @@ router.post('/addqa', async (req, res) => {
 
   router.post('/store-sender-info', async (req, res) => {
     try {
-      const { whatsappNumber, userName } = req.body;
+      const { whatsappNumber, userName, prompt } = req.body;
   
       // Create a new document using the SenderInfo model
       const newSenderInfo = new Qa({
