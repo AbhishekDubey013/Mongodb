@@ -200,6 +200,7 @@ router.post('/addqa', async (req, res) => {
       const newSenderInfo = new Qa({
         whatsappNumber,
         userName,
+        prompt,
       });
   
       // Save the new document to the database
