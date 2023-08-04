@@ -268,7 +268,7 @@ router.get('/users', async (req, res) => {
 })
 
 // API endpoint for storing data
-app.post('/abc', (req, res) => {
+router.post('/abc', (req, res) => {
     const { mobileNumber, dataArray } = req.body;
   
     if (!mobileNumber || !dataArray) {
