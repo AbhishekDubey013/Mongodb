@@ -266,5 +266,28 @@ router.get('/users', async (req, res) => {
         res.status(422).json(error);
     }
 })
+
+// API endpoint for storing data
+app.post('/abc', (req, res) => {
+    const { mobileNumber, dataArray } = req.body;
+  
+    if (!mobileNumber || !dataArray) {
+      return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
+    }
+  
+    const newOp = new Op({
+      mobileNumber: mobileNumber,
+      dataArray: dataArray
+    });
+  
+    newOp.save()
+      .then(() => {
+        res.json({ message: 'Data saved successfully' });
+      })
+      .catch(error => {
+        res.status(500).json({ error: 'Error saving data' });
+      });
+  });
+  
   
 module.exports = router

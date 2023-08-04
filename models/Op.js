@@ -1,19 +1,24 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
+const UserSchema = new mongoose.Schema({
+  mobileNumber: {
+    type: String,
+    required: true
+  },
+  dataArray: {
+    type: [String], // You can change the type of the array elements as needed
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
 
-const UserSchema = new Schema({
-    name:{
-        type:String,
-    },
-    mail:{
-        type:String,
-        required:true
-    },
+const DataModel = mongoose.model('Op', UserSchema);
 
-  });
+module.exports = DataModel;
 
-  module.exports = mongoose.model('Op',UserSchema)
 
 //   Learning:
 
