@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
   mobileNumber: {
     type: String,
-    required: true
+    required: false
   },
   dataArray: {
     type: Array, // You can change the type of the array elements as needed
-    required: true
+    required: false
   },
   createdAt: {
     type: Date,
