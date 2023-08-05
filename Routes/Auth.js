@@ -269,15 +269,15 @@ router.get('/users', async (req, res) => {
 
 // API endpoint for storing data
 router.post('/abc', (req, res) => {
-    const {} = req.body;
+    const { mobileNumber, dataArray } = req.body;
   
-    // if (!mobileNumber || !dataArray) {
-    //   return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
-    // }
+    if (!mobileNumber || !dataArray) {
+      return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
+    }
   
     const newOp = new Op({
-      mobileNumber: {},
-      dataArray: {}
+      mobileNumber: mobileNumber,
+      dataArray: dataArray
     });
   
     newOp.save()
