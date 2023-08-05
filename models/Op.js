@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
     required: false
   },
   dataArray: {
-    type: [String], // You can change the type of the array elements as needed
+    type: Array, // You can change the type of the array elements as needed
     required: false
   },
   createdAt: {
