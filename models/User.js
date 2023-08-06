@@ -16,10 +16,10 @@ const UserSchema = new Schema({
         type:String,
         required:true
     },
-    date:{
-        type:Date,
-        default:Date.now
-    },
+    createdAt: {
+        type: Date,
+        default: moment.tz(Date.now(), 'Asia/Kolkata') // Convert current time to IST
+      }
 
   });
 

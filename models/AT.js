@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const moment = require('moment-timezone');
+
 
 const UserSchema = new mongoose.Schema({
   mobileNumber: {
@@ -11,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: moment.tz(Date.now(), 'Asia/Kolkata') // Convert current time to IST
   }
 });
 

@@ -2,7 +2,9 @@ const express = require('express')
 //model defined
 const User = require('../models/User')
 const Order = require('../models/Students')
-const Op = require('../models/Op')
+const AT = require('../models/AT')
+const Chat = require('../models/Chat')
+const Pre = require('../models/Pre')
 const Qa = require('../models/adhd')
 const router = express.Router()
 const { body, validationResult } = require('express-validator');
@@ -267,15 +269,59 @@ router.get('/users', async (req, res) => {
     }
 })
 
-// API endpoint for storing data
-router.post('/abc', (req, res) => {
+// API endpoint for Pre-diag data
+router.post('/pre', (req, res) => {
     const { mobileNumber, dataArray } = req.body;
   
     if (!mobileNumber || !dataArray) {
       return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
     }
   
-    const newOp = new Op({
+    const newOp = new Pre({
+      mobileNumber: mobileNumber,
+      dataArray: dataArray
+    });
+  
+    newOp.save()
+      .then(() => {
+        res.json({ message: 'Data saved successfully' });
+      })
+      .catch(error => {
+        res.status(500).json({ error: 'Error saving data' });
+      });
+  });
+
+  // API endpoint for Chat storing data
+router.post('/chat', (req, res) => {
+    const { mobileNumber, dataArray } = req.body;
+  
+    if (!mobileNumber || !dataArray) {
+      return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
+    }
+  
+    const newOp = new Chat({
+      mobileNumber: mobileNumber,
+      dataArray: dataArray
+    });
+  
+    newOp.save()
+      .then(() => {
+        res.json({ message: 'Data saved successfully' });
+      })
+      .catch(error => {
+        res.status(500).json({ error: 'Error saving data' });
+      });
+  });
+
+  // API endpoint for AT storing data
+router.post('/at', (req, res) => {
+    const { mobileNumber, dataArray } = req.body;
+  
+    if (!mobileNumber || !dataArray) {
+      return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
+    }
+  
+    const newOp = new AT({
       mobileNumber: mobileNumber,
       dataArray: dataArray
     });
