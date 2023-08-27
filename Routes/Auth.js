@@ -3,6 +3,7 @@ const express = require('express')
 const User = require('../models/User')
 const Order = require('../models/Students')
 const AT = require('../models/AT')
+const PD = require('../models/Pd')
 const Chat = require('../models/Chat')
 const Pre = require('../models/Pre')
 const Qa = require('../models/adhd')
@@ -315,6 +316,27 @@ router.post('/chat', (req, res) => {
 
   // API endpoint for AT storing data
 router.post('/at', (req, res) => {
+    const { mobileNumber, dataArray } = req.body;
+  
+    if (!mobileNumber || !dataArray) {
+      return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
+    }
+  
+    const newOp = new AT({
+      mobileNumber: mobileNumber,
+      dataArray: dataArray
+    });
+  
+    newOp.save()
+      .then(() => {
+        res.json({ message: 'Data saved successfully' });
+      })
+      .catch(error => {
+        res.status(500).json({ error: 'Error saving data' });
+      });
+  });
+
+  router.post('/pd', (req, res) => {
     const { mobileNumber, dataArray } = req.body;
   
     if (!mobileNumber || !dataArray) {
