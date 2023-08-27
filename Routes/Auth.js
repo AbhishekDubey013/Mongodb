@@ -343,7 +343,7 @@ router.post('/at', (req, res) => {
       return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
     }
   
-    const newOp = new AT({
+    const newOp = new PD({
       mobileNumber: mobileNumber,
       dataArray: dataArray
     });
