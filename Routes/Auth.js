@@ -155,25 +155,6 @@ router.get("/products", async(req, res) => {
     })
 });
 
-// router.post('/addqa', async (req, res) => {
-//     try {
-//       const { data } = req.body;
-  
-//       // Create a new document using the Qa model
-//       const newQa = new Qa({
-//         data,
-//         // Add more fields as needed for your "qas" collection
-//       });
-  
-//       // Save the new document to the "qas" collection
-//       const savedQa = await newQa.save();
-  
-//       res.json(savedQa);
-//     } catch (error) {
-//       console.error('Error adding QA:', error);
-//       res.status(500).json({ error: 'Internal server error' });
-//     }
-//   });
 
 router.post('/addqa', async (req, res) => {
     try {
@@ -324,6 +305,7 @@ router.post('/at', (req, res) => {
   
     const newOp = new AT({
       mobileNumber: mobileNumber,
+      flag: 'Y',
       dataArray: dataArray
     });
   
