@@ -318,41 +318,53 @@ router.post('/at', (req, res) => {
       });
   });
 
-  //for reading data of AT
-  router.get('/adh', async (req, res) => {
-    try {
-      const allQas = await AT.find(); // This will fetch all documents from the "qas" collection
-      res.json(allQas);
-    } catch (error) {
-      console.error('Error fetching QAs:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
+  // //for reading data of AT
+  // router.get('/adh', async (req, res) => {
+  //   try {
+  //     const allQas = await AT.find(); // This will fetch all documents from the "qas" collection
+  //     res.json(allQas);
+  //   } catch (error) {
+  //     console.error('Error fetching QAs:', error);
+  //     res.status(500).json({ error: 'Internal server error' });
+  //   }
+  // });
+
+// for reading data of AT where flag is 'Y'
+router.get('/adh', async (req, res) => {
+  try {
+    const filteredQas = await AT.find({ flag: 'Y' }, 'mobileNumber'); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
+    res.json(filteredQas);
+  } catch (error) {
+    console.error('Error fetching QAs:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
   // API endpoint for updating flag
 
-  router.put('/up', async (req, res) => {
-    const { id, newFlag } = req.body;
+  router.put('/at/updateFlag', async (req, res) => {
+    const { mobileNumber, newFlag } = req.body;
   
-    if (!id || !newFlag) {
-      return res.status(400).json({ error: 'id and newFlag are required' });
+    if (!mobileNumber || !newFlag) {
+      return res.status(400).json({ error: 'mobileNumber and newFlag are required' });
     }
   
     try {
-      const result = await AT.findOneAndUpdate(
-        { _id: mongoose.Types.ObjectId(id) }, 
-        { flag: newFlag }, 
-        { new: true }  // returns the updated document
+      const updatedOp = await AT.findOneAndUpdate(
+        { mobileNumber: mobileNumber },  // find record with this mobileNumber
+        { flag: newFlag },  // update the flag
+        { new: true }  // return the updated document
       );
   
-      if (!result) {
-        return res.status(404).json({ message: 'Document not found' });
+      if (!updatedOp) {
+        return res.status(404).json({ error: 'Data not found' });
       }
   
-      res.json({ message: 'Flag updated successfully' });
+      res.json({ message: 'Flag updated successfully', updatedData: updatedOp });
+  
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error updating flag' });
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
   });
 
