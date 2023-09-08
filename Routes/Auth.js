@@ -342,7 +342,7 @@ router.get('/adh', async (req, res) => {
 
   // API endpoint for updating flag
 
-  router.put('/at/updateFlag', async (req, res) => {
+  router.put('/up', async (req, res) => {
     const { mobileNumber, newFlag } = req.body;
   
     if (!mobileNumber || !newFlag) {
