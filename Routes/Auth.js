@@ -332,28 +332,27 @@ router.post('/at', (req, res) => {
   // API endpoint for updating flag
 
   router.put('/up', async (req, res) => {
-    const { mobileNumber, newFlag } = req.body;
+    const { id, newFlag } = req.body;
   
-    if (!mobileNumber || !newFlag) {
-      return res.status(400).json({ error: 'mobileNumber and newFlag are required' });
+    if (!id || !newFlag) {
+      return res.status(400).json({ error: 'id and newFlag are required' });
     }
   
     try {
-      const updatedOp = await AT.findOneAndUpdate(
-        { mobileNumber: mobileNumber },  // find record with this mobileNumber
-        { flag: newFlag },  // update the flag
-        { new: true }  // return the updated document
+      const result = await AT.findOneAndUpdate(
+        { _id: mongoose.Types.ObjectId(id) }, 
+        { flag: newFlag }, 
+        { new: true }  // returns the updated document
       );
   
-      if (!updatedOp) {
-        return res.status(404).json({ error: 'Data not found' });
+      if (!result) {
+        return res.status(404).json({ message: 'Document not found' });
       }
   
-      res.json({ message: 'Flag updated successfully', updatedData: updatedOp });
-  
+      res.json({ message: 'Flag updated successfully' });
     } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      console.error(error);
+      res.status(500).json({ error: 'Error updating flag' });
     }
   });
 
