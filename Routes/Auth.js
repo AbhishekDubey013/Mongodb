@@ -329,6 +329,34 @@ router.post('/at', (req, res) => {
     }
   });
 
+  // API endpoint for updating flag
+
+  router.put('/up', async (req, res) => {
+    const { mobileNumber, newFlag } = req.body;
+  
+    if (!mobileNumber || !newFlag) {
+      return res.status(400).json({ error: 'mobileNumber and newFlag are required' });
+    }
+  
+    try {
+      const updatedOp = await AT.findOneAndUpdate(
+        { mobileNumber: mobileNumber },  // find record with this mobileNumber
+        { flag: newFlag },  // update the flag
+        { new: true }  // return the updated document
+      );
+  
+      if (!updatedOp) {
+        return res.status(404).json({ error: 'Data not found' });
+      }
+  
+      res.json({ message: 'Flag updated successfully', updatedData: updatedOp });
+  
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
   router.post('/pd', (req, res) => {
     const { mobileNumber, dataArray } = req.body;
   
