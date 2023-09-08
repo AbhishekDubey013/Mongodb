@@ -308,16 +308,6 @@ router.post('/at', (req, res) => {
       flag: 'Y',
       dataArray: dataArray
     });
-
-    router.get('/adh', async (req, res) => {
-      try {
-        const allQas = await AT.find(); // This will fetch all documents from the "qas" collection
-        res.json(allQas);
-      } catch (error) {
-        console.error('Error fetching QAs:', error);
-        res.status(500).json({ error: 'Internal server error' });
-      }
-    });
   
     newOp.save()
       .then(() => {
@@ -326,6 +316,17 @@ router.post('/at', (req, res) => {
       .catch(error => {
         res.status(500).json({ error: 'Error saving data' });
       });
+  });
+
+  //for reading data of AT
+  router.get('/adh', async (req, res) => {
+    try {
+      const allQas = await AT.find(); // This will fetch all documents from the "qas" collection
+      res.json(allQas);
+    } catch (error) {
+      console.error('Error fetching QAs:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
   });
 
   router.post('/pd', (req, res) => {
