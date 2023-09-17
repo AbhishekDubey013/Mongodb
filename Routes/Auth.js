@@ -332,7 +332,7 @@ router.post('/at', (req, res) => {
 // for reading data of AT where flag is 'Y'
 router.get('/adh', async (req, res) => {
   try {
-    const filteredQas = await AT.find({ flag: 'Y' }, { mobileNumber: 1 }); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
+    const filteredQas = await AT.find({ flag: 'Y' }, { mobileNumber: 1, _id: 1 }); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
     res.json(filteredQas);
   } catch (error) {
     console.error('Error fetching QAs:', error);
