@@ -343,15 +343,15 @@ router.get('/adh', async (req, res) => {
   // API endpoint for updating flag
 
   router.put('/up', async (req, res) => {
-    const { mobileNumber, newFlag } = req.body;
+    const { id, newFlag } = req.body;
   
-    if (!mobileNumber || !newFlag) {
+    if (!id || !newFlag) {
       return res.status(400).json({ error: 'mobileNumber and newFlag are required' });
     }
   
     try {
       const updatedOp = await AT.findOneAndUpdate(
-        { mobileNumber: mobileNumber },  // find record with this mobileNumber
+        { _id: id },  // find record with this mobileNumber
         { flag: newFlag },  // update the flag
         { new: true }  // return the updated document
       );
