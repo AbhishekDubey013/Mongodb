@@ -332,7 +332,7 @@ router.post('/at', (req, res) => {
 // for reading data of AT where flag is 'Y'
 router.get('/adh', async (req, res) => {
   try {
-    const filteredQas = await AT.find({ flag: 'Y' }, '_id'); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
+    const filteredQas = await AT.find({ flag: 'Y' }, 'mobileNumber','_id'); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
     res.json(filteredQas);
   } catch (error) {
     console.error('Error fetching QAs:', error);
@@ -343,15 +343,15 @@ router.get('/adh', async (req, res) => {
   // API endpoint for updating flag
 
   router.put('/up', async (req, res) => {
-    const { id, newFlag } = req.body;
+    const { mobileNumber, newFlag } = req.body;
   
-    if (!id || !newFlag) {
+    if (!mobileNumber || !newFlag) {
       return res.status(400).json({ error: 'mobileNumber and newFlag are required' });
     }
   
     try {
       const updatedOp = await AT.findOneAndUpdate(
-        { _id: id },  // find record with this mobileNumber
+        { mobileNumber: mobileNumber },  // find record with this mobileNumber
         { flag: newFlag },  // update the flag
         { new: true }  // return the updated document
       );
