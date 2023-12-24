@@ -368,6 +368,45 @@ router.get('/adh', async (req, res) => {
     }
   });
 
+  // for reading data of Pd where flag is 'Y'
+router.get('/pdh', async (req, res) => {
+  try {
+    const filteredQas = await PD.find({ flag: 'Y' }, { mobileNumber: 1, dataArray: 1 }); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
+    res.json(filteredQas);
+  } catch (error) {
+    console.error('Error fetching QAs:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+  // API endpoint for updating flag
+
+  router.put('/pp', async (req, res) => {
+    const { _id, newFlag } = req.body;
+  
+    if (!_id || !newFlag) {
+      return res.status(400).json({ error: 'mobileNumber and newFlag are required' });
+    }
+  
+    try {
+      const updatedOp = await PD.findOneAndUpdate(
+        { _id: _id },  // find record with this mobileNumber
+        { flag: newFlag },  // update the flag
+        { new: true }  // return the updated document
+      );
+  
+      if (!updatedOp) {
+        return res.status(404).json({ error: 'Data not found' });
+      }
+  
+      res.json({ message: 'Flag updated successfully', updatedData: updatedOp });
+  
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
   router.post('/pd', (req, res) => {
     const { mobileNumber, dataArray } = req.body;
   
@@ -377,6 +416,7 @@ router.get('/adh', async (req, res) => {
   
     const newOp = new PD({
       mobileNumber: mobileNumber,
+      flag: 'Y',
       dataArray: dataArray
     });
   
