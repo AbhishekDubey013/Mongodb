@@ -3,6 +3,10 @@ const moment = require('moment-timezone');
 
 
 const UserSchema = new mongoose.Schema({
+  PK: {
+    type: String,
+    required: false
+  },
   mobileNumber: {
     type: String,
     required: false

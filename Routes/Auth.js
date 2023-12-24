@@ -297,7 +297,7 @@ router.post('/chat', (req, res) => {
 
   // API endpoint for AT storing data
 router.post('/at', (req, res) => {
-    const { mobileNumber, dataArray } = req.body;
+    const { mobileNumber, dataArray,PK } = req.body;
   
     if (!mobileNumber || !dataArray) {
       return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
@@ -305,8 +305,8 @@ router.post('/at', (req, res) => {
   
     const newOp = new AT({
       mobileNumber: mobileNumber,
-      flag: 'Y',
-      dataArray: dataArray
+      dataArray: dataArray,
+      PK:PK
     });
   
     newOp.save()
@@ -340,33 +340,6 @@ router.get('/adh', async (req, res) => {
   }
 });
 
-  // API endpoint for updating flag
-
-  router.put('/up', async (req, res) => {
-    const { _id, newFlag } = req.body;
-  
-    if (!_id || !newFlag) {
-      return res.status(400).json({ error: 'mobileNumber and newFlag are required' });
-    }
-  
-    try {
-      const updatedOp = await AT.findOneAndUpdate(
-        { _id: _id },  // find record with this mobileNumber
-        { flag: newFlag },  // update the flag
-        { new: true }  // return the updated document
-      );
-  
-      if (!updatedOp) {
-        return res.status(404).json({ error: 'Data not found' });
-      }
-  
-      res.json({ message: 'Flag updated successfully', updatedData: updatedOp });
-  
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
 
   // for reading data of Pd where flag is 'Y'
 router.get('/pdh', async (req, res) => {
@@ -408,7 +381,7 @@ router.get('/pdh', async (req, res) => {
   });
 
   router.post('/pd', (req, res) => {
-    const { mobileNumber, dataArray } = req.body;
+    const { mobileNumber, dataArray,PK } = req.body;
   
     if (!mobileNumber || !dataArray) {
       return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
@@ -417,7 +390,8 @@ router.get('/pdh', async (req, res) => {
     const newOp = new PD({
       mobileNumber: mobileNumber,
       flag: 'Y',
-      dataArray: dataArray
+      dataArray: dataArray,
+      PK :PK
     });
   
     newOp.save()
