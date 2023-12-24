@@ -345,7 +345,7 @@ router.get('/adh', async (req, res) => {
   // for reading data of Pd where flag is 'Y'
 router.get('/pdh', async (req, res) => {
   try {
-    const filteredQas = await PD.find({ flag: 'Y' }, { mobileNumber: 1, dataArray: 1 }); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
+    const filteredQas = await PD.find({ flag: 'Y' }, { mobileNumber: 1, dataArray: 1,PK : 1 }); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
     res.json(filteredQas);
   } catch (error) {
     console.error('Error fetching QAs:', error);
