@@ -345,7 +345,7 @@ router.get('/adh', async (req, res) => {
   // for reading data of Pd where flag is 'Y'
 router.get('/pdh', async (req, res) => {
   try {
-    const filteredQas = await PD.find({ flag: 'Y' }, { mobileNumber: 1, dataArray: 1,PK : 1 }); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
+    const filteredQas = await PD.find({ flag: 'Y' }, { mobileNumber: 1, dataArray: 1,PK : 1,moduleName:1 }); // This will fetch all documents from the "qas" collection where flag is 'Y' and only return the 'mobileNumber'
     res.json(filteredQas);
   } catch (error) {
     console.error('Error fetching QAs:', error);
@@ -382,7 +382,7 @@ router.get('/pdh', async (req, res) => {
   });
 
   router.post('/pd', (req, res) => {
-    const { mobileNumber, dataArray,PK } = req.body;
+    const { mobileNumber, dataArray,PK,moduleName } = req.body;
   
     if (!mobileNumber || !dataArray) {
       return res.status(400).json({ error: 'mobileNumber and dataArray are required' });
@@ -390,6 +390,7 @@ router.get('/pdh', async (req, res) => {
   
     const newOp = new PD({
       mobileNumber: mobileNumber,
+      moduleName:moduleName,
       flag: 'Y',
       dataArray: dataArray,
       PK :PK

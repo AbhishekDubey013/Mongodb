@@ -7,6 +7,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  moduleName: {
+    type: String,
+    required: false
+  },
   mobileNumber: {
     type: String,
     required: false
