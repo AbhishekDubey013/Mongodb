@@ -14,7 +14,7 @@ const app = express()
 app.use(cors());
 const port = process.env.PORT || 5001
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://gt-7tqn.onrender.com");
+  res.setHeader("Access-Control-Allow-Origin", "https://psychdoc.in");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
