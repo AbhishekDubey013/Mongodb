@@ -15,7 +15,12 @@ const fetch = require('../middleware/fetchdetails');
 const jwtSecret = "HaHa"
 const cors = require("cors");
 const users = require("../models/userSchema");
+const UserData = require('../models/UserData');
 const bodyParser = require("body-parser");
+require('dotenv').config();
+DATABASE = "mongodb+srv://abhi013:Akbarnama%40123@cluster0.sdboo.mongodb.net/mernapp?retryWrites=true&w=majority"
+const MongoClient = require('mongodb').MongoClient;
+const mongoClient = new MongoClient(DATABASE);
 router.post('/createuser', [
     // 1.Validation starts
     body('email').isEmail(),
@@ -352,6 +357,72 @@ router.get('/pdh', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// POST endpoint to receive and save user data
+router.post('/userData', async (req, res) => {
+  const {
+    gender,
+    maritalStatus,
+    age,
+    height,
+    weight,
+    employmentStatus,
+    sleep,
+    healthCondition
+  } = req.body;
+
+  // Check for the presence and non-nullity of each required field
+  if (!gender || !maritalStatus || !age || height == null || weight == null ||
+      !employmentStatus || !sleep || !healthCondition) {
+    return res.status(400).json({
+      error: 'All fields are required and must be valid.'
+    });
+  }
+
+  try {
+    const userData = new UserData({
+      gender,
+      maritalStatus,
+      age,
+      height,
+      weight,
+      employmentStatus,
+      sleep,
+      healthCondition
+    });
+    console.log(userData);
+    const savedUserData = await userData.save();
+    res.status(201).json(savedUserData);
+  } catch (error) {
+    console.error('Failed to save user data:', error);
+    res.status(400).json({ message: 'Failed to save user data', error: error.message });
+  }
+});
+
+// Assuming Express.js and body-parser middleware are already set up to parse JSON:
+router.post('/results', async (req, res) => {
+  const { phoneNumber } = req.body;
+  console.log(phoneNumber)
+  try {
+      await mongoClient.connect();
+      const db = mongoClient.db("yourDatabaseName");
+      const results = db.collection("results");
+
+      //const result = await results.findOne({ formattedPhoneNumber: phoneNumber });
+      const result = await results.find({ formattedPhoneNumber: phoneNumber }).sort({ timestamp: -1 }).limit(1).next();
+      if (result) {
+          res.json(result);
+      } else {
+          res.status(404).json({ message: 'No results found for this phone number.' });
+      }
+  } catch (error) {
+      console.error("Failed to fetch data:", error);
+      res.status(500).json({ message: "Failed to fetch results", error: error.message });
+  } finally {
+      await mongoClient.close();
+  }
+});
+
 
   // API endpoint for updating flag
 
