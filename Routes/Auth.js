@@ -215,7 +215,7 @@ router.post('/addqa', async (req, res) => {
 
   // Assuming you have Express.js set up and connected to MongoDB
 
-router.post('/results', async (req, res) => {
+router.get('/results', async (req, res) => {
   try {
     const { phoneNumber } = req.body; // Extract phoneNumber from the request body
 
