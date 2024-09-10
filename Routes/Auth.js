@@ -212,6 +212,36 @@ router.post('/addqa', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+  // Assuming you have Express.js set up and connected to MongoDB
+
+router.post('/results', async (req, res) => {
+  try {
+    const { phoneNumber } = req.body; // Extract phoneNumber from the request body
+
+    // Validate if the phoneNumber is provided
+    if (!phoneNumber) {
+      return res.status(400).json({ error: 'Phone number is required' });
+    }
+
+    // Perform some logic to find or generate analysis result based on phoneNumber
+    // For example, let's assume you are querying an "AnalysisResult" collection
+    const analysisResult = await AnalysisResult.findOne({ phoneNumber });
+
+    // If no result is found
+    if (!analysisResult) {
+      return res.status(404).json({ error: 'No results found for this phone number' });
+    }
+
+    // If the result is found, send it back
+    res.json({ analysisResult: analysisResult.data });
+  } catch (error) {
+    console.error('Error fetching analysis result:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
   
   
 router.get('/users', async (req, res) => {
