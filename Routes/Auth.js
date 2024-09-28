@@ -226,7 +226,7 @@ router.get('/results', async (req, res) => {
 
     // Perform some logic to find or generate analysis result based on phoneNumber
     // For example, let's assume you are querying an "AnalysisResult" collection
-    const analysisResult = await result.findOne({ phoneNumber });
+    const analysisResult = await results.findOne({ phoneNumber });
 
     // If no result is found
     if (!analysisResult) {
