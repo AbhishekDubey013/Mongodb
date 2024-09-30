@@ -241,7 +241,7 @@ router.post('/addqa', async (req, res) => {
       }
   
       // If the result is found, send it back
-      res.json({ analysisResult: analysisResult.analysisResult });
+      res.json({ analysisResult: analysisResult });
     } catch (error) {
       console.error('Error fetching analysis result:', error);
       res.status(500).json({ error: 'Internal server error' });
