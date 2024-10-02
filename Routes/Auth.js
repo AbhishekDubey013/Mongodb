@@ -216,6 +216,42 @@ router.post('/addqa', async (req, res) => {
 
   // Assuming you have Express.js set up and connected to MongoDB
 
+  // router.get('/results', async (req, res) => {
+  //   try {
+  //     // Connect to MongoDB
+  //     await mongoClient.connect();
+  
+  //     // Select your database and collection
+  //     const db = mongoClient.db("yourDatabaseName");
+  //     const results = db.collection("results");
+  
+  //     const { phoneNumber } = req.body; // Extract phoneNumber from the request body
+  
+  //     // Validate if the phoneNumber is provided
+  //     if (!phoneNumber) {
+  //       return res.status(400).json({ error: 'Phone number is required' });
+  //     }
+  
+  //     // Perform query based on phoneNumber
+  //     const analysisResult = await results.findOne({ formattedPhoneNumber: phoneNumber });
+  
+  //     // If no result is found
+  //     if (!analysisResult) {
+  //       return res.status(404).json({ error: 'No results found for this phone number' });
+  //     }
+  
+  //     // If the result is found, send it back
+  //     res.json({ analysisResult: analysisResult.analysisResult });
+  //   } catch (error) {
+  //     console.error('Error fetching analysis result:', error);
+  //     res.status(500).json({ error: 'Internal server error' });
+  //   } finally {
+  //     // Optional: Close MongoDB connection after request (depends on use case)
+  //     await mongoClient.close();
+  //   }
+  // });
+
+
   router.get('/results', async (req, res) => {
     try {
       // Connect to MongoDB
@@ -225,7 +261,8 @@ router.post('/addqa', async (req, res) => {
       const db = mongoClient.db("yourDatabaseName");
       const results = db.collection("results");
   
-      const { phoneNumber } = req.body; // Extract phoneNumber from the request body
+      // Extract phoneNumber from query params instead of req.body for a GET request
+      const { phoneNumber } = req.query;
   
       // Validate if the phoneNumber is provided
       if (!phoneNumber) {
@@ -250,6 +287,7 @@ router.post('/addqa', async (req, res) => {
       await mongoClient.close();
     }
   });
+  
 
 
   
