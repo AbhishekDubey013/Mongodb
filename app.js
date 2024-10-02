@@ -11,30 +11,30 @@ const express = require('express');
 const nodemon = require('nodemon');
 const { eventNames } = require('./models/User');
 const app = express()
-// const allowedOrigins = ["https://psychdoc.in", "https://pd-backend-ia41.onrender.com"];
+const allowedOrigins = ["https://psychdoc.in", "https://pd-backend-ia41.onrender.com"];
 
-// const corsOptions = {
-//   origin: (origin, callback) => {
-//     if (allowedOrigins.includes(origin) || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   credentials: true, // If you need to allow credentials like cookies
-// };
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // If you need to allow credentials like cookies
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 const port = process.env.PORT || 5001
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin","https://psychdoc.in");
-  //"https://psychdoc.in"
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin","https://psychdoc.in","https://pd-backend-ia41.onrender.com");
+//   //"https://psychdoc.in"
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 app.use(express.json())
 
 app.get('/', (req, res) => {
